@@ -1,0 +1,79 @@
+body, ul, li {
+	margin: 0;
+	padding: 0;	
+	box-sizing: border-box;
+}
+button {
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  }
+
+body {
+	background-color: #b4ffcb;
+	font-size: 18px;
+	color: black;
+}
+
+li {
+	list-style:none;
+	width: 200px;
+	height: auto;
+	max-height: 200px;
+	padding: 5px;	
+	border: 3px solid #439a63;
+	margin:auto auto 10px auto;
+	background-color: #43ffff;
+	border-radius: 10px ;
+}
+.inactive{
+	background-color: #9a9a9a;
+}
+
+.changeStatus, .deleteTaskfromList, .editTask {
+	background-color: #7fcd98;
+	border:1px solid #439a63;
+	border-radius: 10px ;
+	display: block;
+	margin:auto;
+	width: 50%;
+	text-align: center;
+	margin-bottom: 5px;
+}
+
+.tasksBlock{
+	width: auto;
+	padding-top: 20px;
+
+}
+
+.toDoForm,.tasksBlock{
+	width: 300px;
+	height: auto;
+	margin: auto;
+}
+
+.submitNewTask{
+	background-color: #7fcd98;
+	border:1px solid #439a63;
+	border-radius: 10px ;
+	width: 50px;
+	display: block;
+	margin: 10px auto 10px auto;
+}
+.inputField{
+	width: 80%;
+	height: auto;
+	background-color: #43ff94;
+	min-height: 60px;
+	border: 3px solid #439a63;
+	border-radius: 10px;
+	display: block;
+	margin: 10px auto 0px auto;
+	padding: 3px 3px 3px 5px;
+	box-sizing: border-box;
+}
+
+
