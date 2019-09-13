@@ -42,13 +42,15 @@
 							id: (Math.random()*1000000).toFixed(0)
 						})
 						const taskItem = document.createElement('li');
+						const taskItemBlock = document.createElement('div');
 						const addedValue = document.querySelector('input').value;
-					 	 	taskItem.innerText=addedValue;
+					 	 	taskItemBlock.innerText=addedValue;
 					 	 	const taskId=(this.tasks.find(element=>{
 					 	 		return element.text===addedValue;
 					 	 	}).id);
 					 		taskItem.setAttribute('id', taskId);
 					 	 	document.querySelector('.taskList').append(taskItem);
+					 	 	document.querySelector('li:last-child').append(taskItemBlock);
 				 	 	const deleteButton = document.createElement('button');
 					 	 	deleteButton.classList.add('deleteTaskfromList');
 					 	 	deleteButton.innerText='Remove';
@@ -74,10 +76,8 @@
 							editButton.addEventListener('click', function(event){
 								const newText=prompt('Введите новое содержание заметки');
 								toDoList.editTasks(taskId, newText);
-								event.target.parentElement.firstChild.data=newText;
-
+								event.target.parentElement.querySelector('div').innerText=newText;
 							})
-
 
 					}	
 			},
@@ -107,11 +107,9 @@
 			checkDone(id){	
 						var currentTaskIndex=this.tasks.findIndex(function(task){
 							if (task.id===id){
-								console.log(task);
 								return task;
 							}
 					});
-						console.log(this.tasks[currentTaskIndex]);
 						return	this.tasks[currentTaskIndex].status=!this.tasks[currentTaskIndex].status;
 					}
 		};
@@ -136,35 +134,26 @@
 						tasksBlock.classList.add('tasksBlock');
 					const tasksBlockList = document.createElement('ul');
 						tasksBlockList.classList.add('taskList');
-					document.body.prepend(tasksBlock);
-					document.body.prepend(formBlock);
-					document.body.querySelector('form').prepend(inputBlock);
-					document.body.querySelector('form').prepend(labelElement);
-					document.body.querySelector('form').append(sendButton);
-					document.body.querySelector('div').append(tasksBlockList);
-
-
-
+							document.body.prepend(tasksBlock);
+							document.body.prepend(formBlock);
+							document.body.querySelector('form').prepend(inputBlock);
+							document.body.querySelector('form').prepend(labelElement);
+							document.body.querySelector('form').append(sendButton);
+							document.body.querySelector('div').append(tasksBlockList);
 
 					const submitButton = document.querySelector('.submitNewTask');
-
-				    submitButton.addEventListener('click', function(event){
-				 		event.preventDefault();
-				 		const addedValue = document.querySelector('input').value;
-				 		if (addedValue<1){
-								return alert('Заметка не может быть пустой!');
-							} else {
-								toDoList.createTasks(addedValue);
-				 	 			document.querySelector('input').value='';
-							}
-				 	 	
-				 })
+				    	submitButton.addEventListener('click', function(event){
+				 			event.preventDefault();
+				 			const addedValue = document.querySelector('input').value;
+					 		if (addedValue<1){
+									return alert('Заметка не может быть пустой!');
+								} else {
+									toDoList.createTasks(addedValue);
+					 	 			document.querySelector('input').value='';
+								}				 	 	
+				 	})
 				}
-
-				createToDolit();
-
-				 
-				
+				createToDolit();		
 	</script>
 </body>
 </html>
