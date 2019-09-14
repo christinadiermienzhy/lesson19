@@ -48,6 +48,7 @@ li div {
 	border:1px solid #439a63;
 	border-radius: 10px ;
 	width: 30%;
+	min-width: 65px;
 	margin: 5px;
 	text-align: center;
 	

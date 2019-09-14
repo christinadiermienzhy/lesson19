@@ -31,7 +31,7 @@
 							if ((task.text).toUpperCase()===taskText.toUpperCase()){
 								return task;
 							}
-						})
+				})
 					if 	(currentTaskIndex>=0){
 						alert('Такая заметка уже существует!')
 					} else {
@@ -49,12 +49,12 @@
 					 	 		return element.text===addedValue;
 					 	 	}).id);
 					 		taskItem.setAttribute('id', taskId);
-					 	 	document.querySelector('.taskList').append(taskItem);
-					 	 	document.querySelector('li:last-child').append(taskItemBlock);
+					 	 	document.querySelector('.taskList').prepend(taskItem);
+					 	 	document.querySelector('li:first-child').append(taskItemBlock);
 				 	 	const deleteButton = document.createElement('button');
 					 	 	deleteButton.classList.add('deleteTaskfromList');
 					 	 	deleteButton.innerText='Remove';
-							document.querySelector('li:last-child').append(deleteButton);
+							document.querySelector('li:first-child').append(deleteButton);
 							deleteButton.addEventListener('click', function(event){
 								toDoList.deleteTasks(taskId);
 							})
@@ -62,7 +62,7 @@
 						const changeStatusButton = document.createElement('button');
 					 	 	changeStatusButton.classList.add('changeStatus');
 					 	 	changeStatusButton.innerText='Done';
-							document.querySelector('li:last-child').append(changeStatusButton);
+							document.querySelector('li:first-child').append(changeStatusButton);
 							changeStatusButton.addEventListener('click', function(event){
 								toDoList.checkDone(taskId);
 								changeStatusButton.setAttribute('disabled',false);
@@ -72,11 +72,12 @@
 						const editButton = document.createElement('button');
 					 	 	editButton.classList.add('editTask');
 					 	 	editButton.innerText='Edit';
-							document.querySelector('li:last-child').append(editButton);
+							document.querySelector('li:first-child').append(editButton);
 							editButton.addEventListener('click', function(event){
 								const newText=prompt('Введите новое содержание заметки');
+								console.log(toDoList)
 								toDoList.editTasks(taskId, newText);
-								event.target.parentElement.querySelector('div').innerText=newText;
+								
 							})
 
 					}	
@@ -99,12 +100,27 @@
 								return task;
 							}
 						})
-						var verificationStatus =confirm('Сохранить сделанные изменения?');
-						if (verificationStatus===true){
-							this.tasks[currentTaskIndex].text=editedTask;
+						var verificationStatus = confirm('Сохранить сделанные изменения?');
+						if (editedTask.length>0){
+								if (verificationStatus === true ){
+									var currentTaskIndexEdit = this.tasks.findIndex(function(task){
+										if ((task.text).toUpperCase() === editedTask.toUpperCase()){
+											return task;
+										}
+									})
+									if 	(currentTaskIndexEdit>=0){
+										alert('Такая заметка уже существует!')
+									} else {
+										this.tasks[currentTaskIndex].text=editedTask;
+										event.target.parentElement.querySelector('div').innerText=editedTask;
+									}
+								}
+						} else {
+							return alert('Заметка не может быть пустой!');
 						}
+													
 			},
-			checkDone(id){	
+			checkDone(id) {	
 						var currentTaskIndex=this.tasks.findIndex(function(task){
 							if (task.id===id){
 								return task;
@@ -145,7 +161,7 @@
 				    	submitButton.addEventListener('click', function(event){
 				 			event.preventDefault();
 				 			const addedValue = document.querySelector('input').value;
-					 		if (addedValue<1){
+					 		if (addedValue.length===0){
 									return alert('Заметка не может быть пустой!');
 								} else {
 									toDoList.createTasks(addedValue);
